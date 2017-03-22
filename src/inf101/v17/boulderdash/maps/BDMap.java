@@ -155,6 +155,8 @@ public class BDMap {
 			return new BDSand(this);
 		} else if (c == ' ') {
 			return new BDEmpty(this);
+		} else if (c == 'd') {
+			return new BDDiamond(this);
 		}
 
 		System.err.println("Illegal character in map definition at (" + x + ", " + y + "): '" + c + "'");
@@ -244,8 +246,20 @@ public class BDMap {
 	 * @return
 	 */
 	public Position getPosition(IBDObject object) {
-		// TODO
-		
+		int width = grid.getWidth();
+		int height = grid.getHeight();
+
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				IBDObject obj = get(x, y);
+				if (object.equals(obj)) {
+					Position position = new Position(x, y);
+					return position;
+				}
+
+			}
+		}
+
 		return null;
 	}
 
@@ -284,7 +298,16 @@ public class BDMap {
 	}
 
 	public void step() {
-		// TODO
 		
+		int width = grid.getWidth();
+		int height = grid.getHeight();
+		
+		for(int x = 0; x < width; x++){
+			for(int y = 0; y<height; y++){
+				IBDObject object = get(x,y);
+				object.step();
+			}
+		}
+
 	}
 }
