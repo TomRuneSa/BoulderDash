@@ -182,4 +182,6 @@ public class BDBug extends AbstractBDKillingObject implements IBDKillable {
 	public boolean isKillable() {
 		return true;
 	}
+
+	
 }
