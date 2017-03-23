@@ -11,6 +11,7 @@ import inf101.v17.boulderdash.bdobjects.BDBug;
 import inf101.v17.boulderdash.bdobjects.BDDiamond;
 import inf101.v17.boulderdash.bdobjects.BDEmpty;
 import inf101.v17.boulderdash.bdobjects.BDPlayer;
+import inf101.v17.boulderdash.bdobjects.BDRock;
 import inf101.v17.boulderdash.bdobjects.BDSand;
 import inf101.v17.boulderdash.bdobjects.BDWall;
 import inf101.v17.boulderdash.bdobjects.IBDObject;
@@ -157,6 +158,9 @@ public class BDMap {
 			return new BDEmpty(this);
 		} else if (c == 'd') {
 			return new BDDiamond(this);
+		}
+		else if (c == 'r'){
+			return new BDRock(this);
 		}
 
 		System.err.println("Illegal character in map definition at (" + x + ", " + y + "): '" + c + "'");
