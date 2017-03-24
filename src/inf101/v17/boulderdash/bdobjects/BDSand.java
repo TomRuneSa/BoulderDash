@@ -22,7 +22,7 @@ public class BDSand extends AbstractBDObject {
 	
 	public BDSand(BDMap owner) {
 		super(owner);
-		InputStream resourceAsStream = getClass().getResourceAsStream("Sand.PNG");
+		InputStream resourceAsStream = getClass().getResourceAsStream("sand.png");
 		ImagePattern image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
 		this.image=image;
 	}
