@@ -89,7 +89,7 @@ public class FallingTest {
  
 		
 	}
-	public void playerRockTest(){ // sjekker om steinen blir flyttet når spilleren går inn i den. 
+	public void playerRockTest(){ // sjekker om steinen blir flyttet nar spilleren gar inn i den. 
 		IGrid<Character> grid = new MyGrid<>(5, 5, ' ');
 		grid.set(2, 2, 'r');
 		grid.set(1, 2, 'p');
