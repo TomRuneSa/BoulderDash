@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import inf101.v17.boulderdash.Direction;
+import inf101.v17.boulderdash.IllegalMoveException;
 import inf101.v17.boulderdash.Position;
 import inf101.v17.boulderdash.bdobjects.AbstractBDFallingObject;
 import inf101.v17.boulderdash.bdobjects.BDDiamond;
@@ -14,7 +15,9 @@ import inf101.v17.boulderdash.bdobjects.IBDObject;
 import inf101.v17.boulderdash.maps.BDMap;
 import inf101.v17.datastructures.IGrid;
 import inf101.v17.datastructures.MyGrid;
+import inf101.v17.boulderdash.bdobjects.BDPlayer;
 
+import javafx.scene.input.KeyCode;
 public class FallingTest {
 
 	private BDMap map;
@@ -69,6 +72,40 @@ public class FallingTest {
 	
 	}
 
+	public void pushTest() throws IllegalMoveException{
+		IGrid<Character> grid = new MyGrid<>(4, 4, ' ');
+		grid.set(2, 2, 'r');
+		
+		map = new BDMap(grid); 
+		BDRock rock = (BDRock) map.get(2,2); 
+		
+		rock.push(Direction.WEST); // new position would be (1,2) 
+		
+		assertEquals(rock, map.get(1,2));  
+		
+		rock.push(Direction.EAST); // new position would be (2,2)
+		
+		assertEquals(rock, map.get(2,2));  	
+ 
+		
+	}
+	public void playerRockTest(){ // sjekker om steinen blir flyttet når spilleren går inn i den. 
+		IGrid<Character> grid = new MyGrid<>(5, 5, ' ');
+		grid.set(2, 2, 'r');
+		grid.set(1, 2, 'p');
+		
+		map = new BDMap(grid);
+		
+		BDRock rock = (BDRock) map.get(2,2); 
+		BDPlayer player = (BDPlayer) map.get(1,2); 
+		player.keyPressed(KeyCode.RIGHT);
+		map.step();
+		
+		
+		assertEquals(rock, map.get(3,2));
+	}
+		
+	
 	@Test
 	public void fallingTest1() {
 		IBDObject obj = map.get(0, 4);

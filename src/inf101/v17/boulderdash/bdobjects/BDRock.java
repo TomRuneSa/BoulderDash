@@ -38,7 +38,7 @@ public class BDRock extends AbstractBDFallingObject {
 		
 		if (owner.canGo(nextPos) && owner.get(nextPos) instanceof BDEmpty) {
 			prepareMove(nextPos);
-			step();
+			
 			return true;
 		}else{
 			throw new IllegalMoveException("The space " + nextPos + " is not a valid move.");
