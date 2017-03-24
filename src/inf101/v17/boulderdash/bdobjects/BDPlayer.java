@@ -40,7 +40,9 @@ public class BDPlayer extends AbstractBDMovingObject implements IBDKillable {
 
 	public BDPlayer(BDMap owner) {
 		super(owner);
+
 		InputStream resourceAsStream = getClass().getResourceAsStream("ynt.png");
+
 		ImagePattern image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0, 1.0, true);
 		this.image = image;
 	}
