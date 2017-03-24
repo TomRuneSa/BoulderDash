@@ -16,7 +16,7 @@ public class BDRock extends AbstractBDFallingObject {
 	
 		public BDRock(BDMap owner) {
 		super(owner);
-		InputStream resourceAsStream = getClass().getResourceAsStream("Grass.png");
+		InputStream resourceAsStream = getClass().getResourceAsStream("Grass.PNG");
 		ImagePattern image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
 		this.image=image;
 	}
@@ -38,7 +38,7 @@ public class BDRock extends AbstractBDFallingObject {
 		
 		if (owner.canGo(nextPos) && owner.get(nextPos) instanceof BDEmpty) {
 			prepareMove(nextPos);
-			
+			step();
 			return true;
 		}else{
 			throw new IllegalMoveException("The space " + nextPos + " is not a valid move.");
