@@ -1,20 +1,29 @@
 package inf101.v17.boulderdash.bdobjects;
 
+import java.io.InputStream;
+
 import inf101.v17.boulderdash.Direction;
 import inf101.v17.boulderdash.IllegalMoveException;
 import inf101.v17.boulderdash.Position;
 import inf101.v17.boulderdash.maps.BDMap;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 
 public class BDRock extends AbstractBDFallingObject {
 
-	public BDRock(BDMap owner) {
+	private ImagePattern image;
+	
+		public BDRock(BDMap owner) {
 		super(owner);
+		InputStream resourceAsStream = getClass().getResourceAsStream("Grass.png");
+		ImagePattern image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
+		this.image=image;
 	}
 
 	@Override
-	public Color getColor() {
-		return Color.DARKGRAY;
+	public Paint getColor() {
+		return image;
 	}
 
 	public boolean push(Direction dir) throws IllegalMoveException {
@@ -25,20 +34,17 @@ public class BDRock extends AbstractBDFallingObject {
 
 		Position rock = owner.getPosition(this);
 
-		nextPos = rock.moveDirection(dir);
+		Position nextPos = rock.moveDirection(dir);
 		
 		if (owner.canGo(nextPos) && owner.get(nextPos) instanceof BDEmpty) {
 			prepareMove(nextPos);
 			step();
+			return true;
 		}else{
 			throw new IllegalMoveException("The space " + nextPos + " is not a valid move.");
 		}
 		
-		Position newPos = nextPos;
-		if(newPos == rock){
-			return false;
-		}
-		return true;
+		
 		
 
 	}
