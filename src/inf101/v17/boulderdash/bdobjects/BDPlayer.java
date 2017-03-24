@@ -47,7 +47,7 @@ public class BDPlayer extends AbstractBDMovingObject implements IBDKillable {
 	@Override
 	public Paint getColor() {
 		if(image == null){
-			InputStream resourceAsStream = getClass().getResourceAsStream("ynt.png");
+			InputStream resourceAsStream = getClass().getResourceAsStream("sonic1.gif");
 
 			image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
 		}
@@ -64,8 +64,12 @@ public class BDPlayer extends AbstractBDMovingObject implements IBDKillable {
 	public void keyPressed(KeyCode key) {
 		// TODO
 		if (key == KeyCode.LEFT) {
+			InputStream resourceAsStream = getClass().getResourceAsStream("sonicrotate.gif");
+			image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
 			askedToGo = Direction.WEST;
 		} else if (key == KeyCode.RIGHT) {
+			InputStream resourceAsStream = getClass().getResourceAsStream("sonic1.gif");
+			image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
 			askedToGo = Direction.EAST;
 		} else if (key == KeyCode.UP) {
 			askedToGo = Direction.NORTH;
