@@ -158,8 +158,7 @@ public class BDMap {
 			return new BDEmpty(this);
 		} else if (c == 'd') {
 			return new BDDiamond(this);
-		}
-		else if (c == 'r'){
+		} else if (c == 'r') {
 			return new BDRock(this);
 		}
 
@@ -302,13 +301,13 @@ public class BDMap {
 	}
 
 	public void step() {
-		
+
 		int width = grid.getWidth();
 		int height = grid.getHeight();
-		
-		for(int x = 0; x < width; x++){
-			for(int y = 0; y<height; y++){
-				IBDObject object = get(x,y);
+
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				IBDObject object = get(x, y);
 				object.step();
 			}
 		}

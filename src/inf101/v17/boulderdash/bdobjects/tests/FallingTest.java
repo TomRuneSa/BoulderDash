@@ -9,6 +9,7 @@ import inf101.v17.boulderdash.Direction;
 import inf101.v17.boulderdash.Position;
 import inf101.v17.boulderdash.bdobjects.AbstractBDFallingObject;
 import inf101.v17.boulderdash.bdobjects.BDDiamond;
+import inf101.v17.boulderdash.bdobjects.BDRock;
 import inf101.v17.boulderdash.bdobjects.IBDObject;
 import inf101.v17.boulderdash.maps.BDMap;
 import inf101.v17.datastructures.IGrid;
@@ -21,7 +22,7 @@ public class FallingTest {
 	@Before
 	public void setup() {
 		IGrid<Character> grid = new MyGrid<>(2, 5, ' ');
-		grid.set(0, 4, 'd');
+		grid.set(0, 4, 'r');
 		grid.set(0, 0, '*');
 		map = new BDMap(grid);
 	}
@@ -35,7 +36,7 @@ public class FallingTest {
 	public void fallingKills1() {
 		// diamond two tiles above kills player
 		IGrid<Character> grid = new MyGrid<>(2, 5, ' ');
-		grid.set(0, 4, 'd');
+		grid.set(0, 4, 'r');
 		grid.set(0, 2, 'p');
 		grid.set(0, 0, '*');
 		map = new BDMap(grid);
@@ -50,23 +51,28 @@ public class FallingTest {
 	@Test
 	public void restingDoesntKill1() {
 		// diamond on top of player doesn't kill player
+		
+		 
 		IGrid<Character> grid = new MyGrid<>(2, 5, ' ');
-		grid.set(0, 3, 'd');
+		grid.set(0, 3, 'r');
 		grid.set(0, 2, 'p');
 		grid.set(0, 0, '*');
 		map = new BDMap(grid);
 		
+		map.step();
+		map.step();
+		map.step();
+		map.step();
 		
-		checkFall(new Position(0, 4));
-		checkFall(new Position(0, 3));
-		checkFall(new Position(0, 2));
-		assertFalse(map.getPlayer().isAlive());
+	
+		assertTrue(map.getPlayer().isAlive());
+	
 	}
 
 	@Test
 	public void fallingTest1() {
 		IBDObject obj = map.get(0, 4);
-		assertTrue(obj instanceof BDDiamond);
+		assertTrue(obj instanceof BDRock);
 
 		// four steps later, we've fallen down one step
 		map.step();
@@ -117,5 +123,6 @@ public class FallingTest {
 		} else
 			return pos;
 	}
+	
 
 }
