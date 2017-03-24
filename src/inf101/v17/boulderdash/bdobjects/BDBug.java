@@ -1,6 +1,11 @@
 package inf101.v17.boulderdash.bdobjects;
 
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,6 +23,7 @@ import inf101.v17.boulderdash.maps.BDMap;
  */
 public class BDBug extends AbstractBDKillingObject implements IBDKillable {
 
+	private ImagePattern image;
 	/**
 	 * The amount of diamonds a bug turns into after it got killed.
 	 */
@@ -90,8 +96,13 @@ public class BDBug extends AbstractBDKillingObject implements IBDKillable {
 	}
 
 	@Override
-	public Color getColor() {
-		return Color.GREEN;
+	public Paint getColor() {
+		if(image == null){
+			InputStream resourceAsStream = getClass().getResourceAsStream("soccerball.png");
+
+			image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
+		}
+		return image;
 	}
 
 	/**
