@@ -1,6 +1,11 @@
 package inf101.v17.boulderdash.bdobjects;
 
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
+
+import java.io.InputStream;
 
 import inf101.v17.boulderdash.maps.BDMap;
 
@@ -13,13 +18,18 @@ import inf101.v17.boulderdash.maps.BDMap;
  */
 public class BDSand extends AbstractBDObject {
 
+	private ImagePattern image;
+	
 	public BDSand(BDMap owner) {
 		super(owner);
+		InputStream resourceAsStream = getClass().getResourceAsStream("Sand.png");
+		ImagePattern image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
+		this.image=image;
 	}
 
 	@Override
-	public Color getColor() {
-		return Color.YELLOW;
+	public Paint getColor() {
+		return image;
 	}
 
 	@Override

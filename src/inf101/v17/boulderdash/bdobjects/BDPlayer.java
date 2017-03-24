@@ -1,8 +1,14 @@
 package inf101.v17.boulderdash.bdobjects;
 
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import inf101.v17.boulderdash.bdobjects.BDRock;
+
+import java.io.InputStream;
+
 import inf101.v17.boulderdash.Direction;
 import inf101.v17.boulderdash.IllegalMoveException;
 import inf101.v17.boulderdash.Position;
@@ -16,6 +22,7 @@ import inf101.v17.boulderdash.maps.BDMap;
  */
 public class BDPlayer extends AbstractBDMovingObject implements IBDKillable {
 
+	private ImagePattern image;
 	/**
 	 * Is the player still alive?
 	 */
@@ -33,11 +40,14 @@ public class BDPlayer extends AbstractBDMovingObject implements IBDKillable {
 
 	public BDPlayer(BDMap owner) {
 		super(owner);
+		InputStream resourceAsStream = getClass().getResourceAsStream("Tnt.png");
+		ImagePattern image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0, 1.0, true);
+		this.image = image;
 	}
 
 	@Override
-	public Color getColor() {
-		return Color.BLUE;
+	public Paint getColor() {
+		return image;
 	}
 
 	/**
@@ -73,48 +83,51 @@ public class BDPlayer extends AbstractBDMovingObject implements IBDKillable {
 	public int numberOfDiamonds() {
 		return diamondCnt;
 	}
-	
-	public void tryCatch(Position position){
-		try{
+
+	public void tryCatch(Position position) {
+		try {
 			prepareMove(position);
-		}
-		catch(IllegalMoveException e){
+		} catch (IllegalMoveException e) {
 			e.printStackTrace();
-			
+
 		}
-		
+
 	}
 
 	@Override
 	public void step() {
 		Position playerPos = owner.getPosition(this);
-		
-		if(askedToGo!= null && owner.canGo(playerPos, askedToGo)){
-			nextPos = playerPos.moveDirection(askedToGo);
-			if(owner.get(nextPos) instanceof BDDiamond){
+
+		if (askedToGo != null && owner.canGo(playerPos, askedToGo)) {
+			Position nextPos = playerPos.moveDirection(askedToGo);
+			if (owner.get(nextPos) instanceof BDDiamond) {
 				diamondCnt++;
-			}
-			else if(owner.get(nextPos) instanceof BDRock){
-				if(askedToGo == Direction.WEST || askedToGo == Direction.EAST){
+				try {
+					prepareMove(nextPos);
+				} catch (IllegalMoveException e) {
+
+				}
+			} else if (owner.get(nextPos) instanceof BDRock) {
+				if (askedToGo == Direction.WEST || askedToGo == Direction.EAST) {
 					BDRock rock = (BDRock) owner.get(nextPos);
-					try{
-						if(rock.push(askedToGo)){
-							rock.step();
+					try {
+						if (rock.push(askedToGo)) {
+							prepareMove(nextPos);
 						}
-					}catch(IllegalMoveException e){
-						
+					} catch (IllegalMoveException e) {
+
 					}
 				}
-			}
-			else if(owner.get(nextPos) instanceof BDBug){
+			} else if (owner.get(nextPos) instanceof BDBug) {
 				kill();
+			} 
+			else {
+				try {
+					prepareMove(nextPos);
+				} catch (IllegalMoveException e) {
+				}
 			}
-			try{
-				prepareMove(nextPos);
-			}catch(IllegalMoveException e){
-				
-			}
-				
+
 		}
 		askedToGo = null;
 		super.step();
