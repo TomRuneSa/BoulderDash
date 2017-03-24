@@ -22,15 +22,15 @@ public class BDSand extends AbstractBDObject {
 	
 	public BDSand(BDMap owner) {
 		super(owner);
-
-		InputStream resourceAsStream = getClass().getResourceAsStream("sand.png");
-
-		ImagePattern image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
-		this.image=image;
 	}
 
 	@Override
 	public Paint getColor() {
+		if(image == null){
+			InputStream resourceAsStream = getClass().getResourceAsStream("sand.png");
+
+			image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
+		}
 		return image;
 	}
 
