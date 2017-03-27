@@ -17,10 +17,6 @@ public class BDRock extends AbstractBDFallingObject {
 		public BDRock(BDMap owner) {
 		super(owner);
 
-		InputStream resourceAsStream = getClass().getResourceAsStream("grass.png");
-
-		ImagePattern image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
-		this.image=image;
 	}
 
 	@Override
@@ -36,16 +32,20 @@ public class BDRock extends AbstractBDFallingObject {
 	public boolean push(Direction dir) throws IllegalMoveException {
 
 		if (dir != Direction.WEST && dir != Direction.EAST) {
+			//Checks that the player wants to push the rock either east or west.
 			throw new IllegalMoveException("You have to move the rock either EAST or WEST");
 		}
 
 		Position rock = owner.getPosition(this);
+		//Gets the position of the rock.
 
 		Position nextPos = rock.moveDirection(dir);
+		//Gets the next position to the rock in the direction the player wants to move.
 		
 		if (owner.canGo(nextPos) && owner.get(nextPos) instanceof BDEmpty) {
 			prepareMove(nextPos);
 			step();
+			//If the criterias of moving, and the next space is empty, move.
 			return true;
 		}else{
 			throw new IllegalMoveException("The space " + nextPos + " is not a valid move.");

@@ -251,11 +251,14 @@ public class BDMap {
 	public Position getPosition(IBDObject object) {
 		int width = grid.getWidth();
 		int height = grid.getHeight();
+		//Sets height and width.
 
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 				IBDObject obj = get(x, y);
+				//Creates object based on the position.
 				if (object.equals(obj)) {
+					//If the object that has been sent in equals the object that we created ourselves. 
 					Position position = new Position(x, y);
 					return position;
 				}
@@ -304,11 +307,14 @@ public class BDMap {
 
 		int width = grid.getWidth();
 		int height = grid.getHeight();
-
+		//Sets height and width.
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
+				//Goes through the grid.
 				IBDObject object = get(x, y);
+				//Gets the object from the position.
 				object.step();
+				//Makes the object step.
 			}
 		}
 

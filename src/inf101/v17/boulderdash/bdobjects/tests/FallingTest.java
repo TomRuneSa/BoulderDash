@@ -43,8 +43,8 @@ public class FallingTest {
 		grid.set(0, 2, 'p');
 		grid.set(0, 0, '*');
 		map = new BDMap(grid);
-		
-		
+		//Sets grid and map with rock, player and sand.
+
 		checkFall(new Position(0, 4));
 		checkFall(new Position(0, 3));
 		checkFall(new Position(0, 2));
@@ -61,7 +61,7 @@ public class FallingTest {
 		grid.set(0, 2, 'p');
 		grid.set(0, 0, '*');
 		map = new BDMap(grid);
-		
+		//Sets grid and map with rock, player and sand.
 		map.step();
 		map.step();
 		map.step();
@@ -72,38 +72,7 @@ public class FallingTest {
 	
 	}
 
-	public void pushTest() throws IllegalMoveException{
-		IGrid<Character> grid = new MyGrid<>(4, 4, ' ');
-		grid.set(2, 2, 'r');
-		
-		map = new BDMap(grid); 
-		BDRock rock = (BDRock) map.get(2,2); 
-		
-		rock.push(Direction.WEST); // new position would be (1,2) 
-		
-		assertEquals(rock, map.get(1,2));  
-		
-		rock.push(Direction.EAST); // new position would be (2,2)
-		
-		assertEquals(rock, map.get(2,2));  	
- 
-		
-	}
-	public void playerRockTest(){ // sjekker om steinen blir flyttet nar spilleren gar inn i den. 
-		IGrid<Character> grid = new MyGrid<>(5, 5, ' ');
-		grid.set(2, 2, 'r');
-		grid.set(1, 2, 'p');
-		
-		map = new BDMap(grid);
-		
-		BDRock rock = (BDRock) map.get(2,2); 
-		BDPlayer player = (BDPlayer) map.get(1,2); 
-		player.keyPressed(KeyCode.RIGHT);
-		map.step();
-		
-		
-		assertEquals(rock, map.get(3,2));
-	}
+	
 		
 	
 	@Test
@@ -150,7 +119,7 @@ public class FallingTest {
 				next = pos;
 			}
 
-			//map.step(); System.out.println(map.getPosition(object));
+			
 			map.step();
 			map.step();
 			map.step();

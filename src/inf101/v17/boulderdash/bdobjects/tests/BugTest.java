@@ -54,16 +54,19 @@ public class BugTest {
 		IGrid<Character> grid = new MyGrid<>(4, 4, '*');
 		grid.set(2, 2, 'b');
 		map = new BDMap(grid);
+		//Creates a grid and map that we will use to test.
 
-		// find the bug
+		// finds the bug.
 		Position bugPos = new Position(2, 2);
 		IBDObject bug = map.get(bugPos);
+		//Gets the bug
 		assertTrue(bug instanceof BDBug);
 
 		for (int i = 0; i < 10; i++) {
-			map.step();
+			map.step();		
 			if (map.get(bugPos) != bug) {
 				fail("Bug moved");
+				//If the position of the bug isn't the same as when the bug started, the bug has moved.
 			}
 			assertEquals(bugPos, map.getPosition(bug));
 
@@ -75,16 +78,19 @@ public class BugTest {
 		IGrid<Character> grid = new MyGrid<>(4, 4, '#');
 		grid.set(2, 2, 'b');
 		map = new BDMap(grid);
-
-		// find the bug
+		//Creates a grid and map that we will use to test
+		
+		// finds the bug
 		Position bugPos = new Position(2, 2);
 		IBDObject bug = map.get(bugPos);
+		//Gets the bug
 		assertTrue(bug instanceof BDBug);
 
 		for (int i = 0; i < 10; i++) {
 			map.step();
 			if (map.get(bugPos) != bug) {
 				fail("Bug moved");
+				//If the position of the bug isn't the same as when the bug started, the bug has moved.
 			}
 			assertEquals(bugPos, map.getPosition(bug));
 
@@ -96,34 +102,45 @@ public class BugTest {
 		IGrid<Character> grid = new MyGrid<>(4, 4, ' ');
 		grid.set(2, 2, 'b');
 		map = new BDMap(grid);
+		//Creates a grid and map that we will use to test
+
 
 		Position bugPos = new Position(2, 2);
+		//Sets the position of the bug
 		IBDObject bug = map.get(bugPos);
+		//Gets the bug
 		Position west = new Position(1, 2);
+		//Sets the position in the west direction from the bugs starting position.
 		Position north = new Position(1, 3);
+		//Sets the position in the north direction based on the west direction.
 		Position east = new Position(2, 3);
+		//Sets the position in the east direction based on the north direction.
 		Position south = new Position(2, 2);
-
+		//Sets the position in the south direction based on the west direction.
+		
 		for (int i = 0; i <= 10; i++) {
 			map.step();
 		}
 		assertEquals(map.getPosition(bug), west);
+		//Chekcs if the new bug position is the same as the west position.
 
 		for (int i = 0; i <= 10; i++) {
 			map.step();
 		}
 		assertEquals(map.getPosition(bug), north);
-
+		//Chekcs if the new bug position is the same as the north position.
+		
 		for (int i = 0; i <= 10; i++) {
 			map.step();
 		}
 		assertEquals(map.getPosition(bug), east);
-
+		//Chekcs if the new bug position is the same as the east position.
+		
 		for (int i = 0; i <= 10; i++) {
 			map.step();
 		}
 		assertEquals(map.getPosition(bug), south);
-
+		//Chekcs if the new bug position is the same as the south position.
 	}
 
 	@Test
