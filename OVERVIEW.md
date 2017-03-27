@@ -37,6 +37,29 @@ We need the getPosition method because we need to find and save the position of 
 
 
 
+Description of the system.
+
+This system is intended to be a 2-dimensional game wich has different objects. Amongst those objects are a player, bugs, diamonds, sand, rocks... But to play the game you need something to play it on, a map. An for the program to read what's supposed to be the map. And for that one creates a mapreader. The mapreader reads from the chosen document what size the map should be, and what it shall contain. It creates a grid.
+The map is then created. The reader reads the different characters in the document, and it is then printed with it's corresponding value. Stone, sand and so forth. In the map, the bugs are supposed to act a certain way, which is spesified in BDBug.java. It says there that a bug should move in a west, north, east, south direction constantly. It also says that if the object in the next position of the bug is killable (Which basically only goes for the player in this case), the bug should kill it. The bug class also checks if the next position of the bug is a valid move for the bug. 
+The same kind of procedure goes for the other objects, such as diamonds and rocks. It's checked if these objects can fall down, if the space below the object is free, and if it is, and the object is supposed to be falling down, the object falls down one space. The criteria for any object other than the player to be able to move is that there is nothing in the space that's going to be moved to. The criteria for the player to move is just that there isn't a rock that can't be moved in the way, as long as it's inside the map grid. There is no action that ends the game, unless you end it yourself, or if you get eaten by the bug. If neither of those happen, you could walk around as long as you want. The game is step-based, so nothing happens unless a step is called upon. In every class that is depending on something to happen has a call to the step method. 
+
+
+
+
+
+Credits:
+
+I have not created any of the pictures or gifs used in this task. 
+Sonic gif: 
+http://giphy.com/gifs/sonic-the-hedgehog-TmkgRTgTyVjjy. 
+
+The rings that are used as diamonds:
+http://giphy.com/gifs/sonic-sprite-facundogomez-MYfNzAwLrln68,0
+
+Rocks and sand: 
+http://opengameart.org/content/2d-minecraft-sprite-pack
+
+The license says that there is no copyright on said product, but I'd like to give a reference either way. 
 
 
 

@@ -3,6 +3,7 @@ package inf101.v17.boulderdash.maps;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import inf101.v17.boulderdash.Direction;
 import inf101.v17.boulderdash.IllegalMoveException;
@@ -265,6 +266,7 @@ public class BDMap {
 
 			}
 		}
+		
 
 		return null;
 	}
