@@ -26,7 +26,7 @@ public class BDDiamond extends AbstractBDFallingObject {
 	@Override
 	public Paint getColor() {
 		if(image == null){
-			InputStream resourceAsStream = getClass().getResourceAsStream("burger.png");
+			InputStream resourceAsStream = getClass().getResourceAsStream("sonicring.gif");
 
 			image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
 		}

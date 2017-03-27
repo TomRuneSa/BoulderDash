@@ -98,7 +98,7 @@ public class BDBug extends AbstractBDKillingObject implements IBDKillable {
 	@Override
 	public Paint getColor() {
 		if(image == null){
-			InputStream resourceAsStream = getClass().getResourceAsStream("soccerball.png");
+			InputStream resourceAsStream = getClass().getResourceAsStream("monster.jpg");
 
 			image = new ImagePattern(new Image(resourceAsStream), 0, 0, 1.0,1.0, true);
 		}
